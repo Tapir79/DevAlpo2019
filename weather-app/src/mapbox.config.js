@@ -1,0 +1,3 @@
+const accessToken = '';
+
+export { accessToken };
