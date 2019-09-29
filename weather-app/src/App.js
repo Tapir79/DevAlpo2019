@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Map from './components/Map';
 import { ApiController } from './controllers/ApiController';
 
 /* Main Component of our weather-application */
 class App extends Component {
-  state: {};
+  state = {
+    mapCoords: [-40.0, 40.0] // coordinates default to Atlantic
+  };
 
   /* React's lifecycle method: executed when the component is mounted in the DOM tree */
   componentDidMount() {
@@ -15,6 +18,7 @@ class App extends Component {
           if (json && json.features) {
             const treCenter = json.features[0].center;
             console.log(`Tampere coordinates: ${treCenter}`);
+            this.setState({ mapCoords: json.features[0].center })
           }
         });
       }
@@ -25,20 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Map coordinates={this.state.mapCoords}></Map>
       </div>
     );
   }
