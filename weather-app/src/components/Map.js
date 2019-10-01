@@ -50,8 +50,20 @@ class Map extends Component {
           {...viewport}
           onViewportChange={(viewport) => this.setState({ viewport })}
           mapboxApiAccessToken={accessToken}>
-          {/* TODO 1. add a Marker and an icon*/}
-          {/* TODO 2. add multiple markers from cafeData */}
+         {cafeData.features.map((cafe) => {
+            return (
+              <Marker key={cafe.properties.ID}
+                latitude={cafe.geometry.coordinates[0]}
+                longitude={cafe.geometry.coordinates[1]}
+                offsetLeft={-15}
+                offsetTop={-15}
+                >
+                <div> <img src={cafeImage} alt={`${cafe.properties.name}`} />
+                  {cafe.properties.name}
+                </div>
+
+              </Marker>)
+          })}
         </ReactMapGL>
       </div>
     );
