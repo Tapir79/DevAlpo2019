@@ -1,27 +1,59 @@
 import React, { Component } from 'react';
-import ReactMapGL from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import { accessToken } from '../mapbox.config.js';
+//import * as cafeData from '../data/cafe.json';
+//import * as cafeImage from '../images/cafe.png';
+import { ApiController } from '../controllers/ApiController';
 
 /* Component wrapping the mapbox map */
 class Map extends Component {
+
   state = {
-    mapConfigs: {
+    viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
-      zoom: 3
+      zoom: 14,
+      latitude: -40,
+      longitude: 40
     }
+  };
+
+  /* React's lifecycle method: executed when the component is mounted in the DOM tree */
+  componentDidMount() {
+    ApiController.getTreCoordinates().then((res, err) => {
+      if (!err) {
+        res.json().then((json, err) => {
+          if (json && json.features) {
+            const treCenter = json.features[0].center;
+            this.setState({
+              viewport: {
+                width: window.innerWidth,
+                height: window.innerHeight,
+                zoom: 14,
+                latitude: treCenter[1],
+                longitude: treCenter[0]
+              }
+            })
+          }
+        });
+      }
+    });
   };
 
   render() {
     /* Set configurations to ReactMapGL's viewport */
-    const coordinates = this.props.coordinates;
-    const viewPort = {...this.state.mapConfigs, longitude: coordinates[0], latitude: coordinates[1] };
-    
+    const viewport = { ...this.state.viewport }
     return (
-      <ReactMapGL
-        { ...viewPort }
-        onViewPortChange={(viewport) => this.setState({viewport})}
-        mapboxApiAccessToken={accessToken}/>
+      <div>
+        <ReactMapGL
+          mapStyle={this.props.mapStyleUrl}
+          {...viewport}
+          onViewportChange={(viewport) => this.setState({ viewport })}
+          mapboxApiAccessToken={accessToken}>
+          {/* TODO 1. add a Marker and an icon*/}
+          {/* TODO 2. add multiple markers from cafeData */}
+        </ReactMapGL>
+      </div>
     );
   }
 };

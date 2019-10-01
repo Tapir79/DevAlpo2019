@@ -1,0 +1,25 @@
+{"type": "FeatureCollection", 
+    "features":[ {
+       "type": "Feature",
+       "properties": {
+           "ID": 1,
+           "name": "Bistro Venla"
+       },
+       "geometry": {
+           "type": "Point",
+           "coordinates": [61.4982904, 23.7577389]
+       } 
+    },
+    {
+        "type": "Feature",
+        "properties": {
+            "ID": 2,
+            "name": "Taverna Lautapelikahvila"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4990956, 23.7571622]
+        } 
+     }
+    ]
+}
