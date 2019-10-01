@@ -12,3 +12,8 @@ export const getMapStyle = (weather) => {
        return 'mapbox://styles/mapbox/light-v10'
     }
 }
+
+export const shouldGoForCoffee = (weather) => {
+    return (weather < -10 || weather > 25) ?
+        'Jää kotiin kahville' : 'No eiköhän mennä kahvilaan!'
+}
