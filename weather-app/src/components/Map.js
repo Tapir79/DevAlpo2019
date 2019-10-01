@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import { accessToken } from '../mapbox.config.js';
-//import * as cafeData from '../data/cafe.json';
-//import * as cafeImage from '../images/cafe.png';
+import * as cafeData from '../data/cafe.json';
+import * as cafeImage from '../images/cafe.png';
 import { ApiController } from '../controllers/ApiController';
 
 /* Component wrapping the mapbox map */
