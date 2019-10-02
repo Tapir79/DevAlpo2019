@@ -59,7 +59,6 @@ class Map extends Component {
               offsetLeft={-15}
               offsetTop={-37}>
               <button
-                className="marker-btn"
                 onClick={event => {
                   event.preventDefault();
                   this.setState({ selectedCafe: cafe })
@@ -73,6 +72,7 @@ class Map extends Component {
           {this.state.selectedCafe && (
             /* Popup wrapper */
             <Popup
+              key={this.state.selectedCafe.properties.ID}
               latitude={this.state.selectedCafe.geometry.coordinates[0]}
               longitude={this.state.selectedCafe.geometry.coordinates[1]}
               offsetLeft={-15}
@@ -80,7 +80,7 @@ class Map extends Component {
               onClose={() => {
                 this.setState({ selectedCafe: null })
               }}>
-              <div key={this.state.selectedCafe.properties.ID}>
+              <div>
                 <div>{this.state.selectedCafe.properties.name}</div>
                 <div>{this.state.selectedCafe.properties.address}</div>
               </div>
