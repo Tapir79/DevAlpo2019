@@ -33,12 +33,9 @@ class Map extends Component {
                 zoom: 14,
                 latitude: treCenter[1],
                 longitude: treCenter[0]
-              }
-            })
-          }
-        });
-      }
-    });
+              }})
+          }});
+      }});
   };
 
   render() {
@@ -46,20 +43,21 @@ class Map extends Component {
     const viewport = { ...this.state.viewport }
     return (
       <div>
+        {/* Map wrapper */}
         <ReactMapGL
           mapStyle={this.props.mapStyleUrl}
           {...viewport}
           onViewportChange={(viewport) => this.setState({ viewport: viewport })}
           mapboxApiAccessToken={accessToken}>
 
+          {/* looping the cafeData */}
           {cafeData.features.map(cafe => (
-
+            /* Marker Pin wrapper */
             <Marker key={cafe.properties.ID}
               latitude={cafe.geometry.coordinates[0]}
               longitude={cafe.geometry.coordinates[1]}
               offsetLeft={-15}
-              offsetTop={-37}
-            >
+              offsetTop={-37}>
               <button
                 className="marker-btn"
                 onClick={event => {
@@ -68,11 +66,12 @@ class Map extends Component {
                 }}>
                 <img src={cafeImage} alt={`${cafe.properties.name}`} />
               </button>
-
             </Marker>
           ))}
 
+          {/* If The selectedCafe from state is true the do the following */}
           {this.state.selectedCafe && (
+            /* Popup wrapper */
             <Popup
               latitude={this.state.selectedCafe.geometry.coordinates[0]}
               longitude={this.state.selectedCafe.geometry.coordinates[1]}
@@ -80,8 +79,7 @@ class Map extends Component {
               offsetTop={-37}
               onClose={() => {
                 this.setState({ selectedCafe: null })
-              }}
-            >
+              }}>
               <div key={this.state.selectedCafe.properties.ID}>
                 <div>{this.state.selectedCafe.properties.name}</div>
                 <div>{this.state.selectedCafe.properties.address}</div>
