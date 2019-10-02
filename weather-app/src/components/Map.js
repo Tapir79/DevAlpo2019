@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { accessToken } from '../mapbox.config.js';
 import * as cafeData from '../data/cafe.json';
 import * as cafeImage from '../images/cafe.png';
@@ -15,7 +15,8 @@ class Map extends Component {
       zoom: 14,
       latitude: -40,
       longitude: 40
-    }
+    },
+    selectedCafe: null
   };
 
   /* React's lifecycle method: executed when the component is mounted in the DOM tree */
@@ -48,22 +49,46 @@ class Map extends Component {
         <ReactMapGL
           mapStyle={this.props.mapStyleUrl}
           {...viewport}
-          onViewportChange={(viewport) => this.setState({ viewport })}
+          onViewportChange={(viewport) => this.setState({ viewport: viewport })}
           mapboxApiAccessToken={accessToken}>
-         {cafeData.features.map((cafe) => {
-            return (
-              <Marker key={cafe.properties.ID}
-                latitude={cafe.geometry.coordinates[0]}
-                longitude={cafe.geometry.coordinates[1]}
-                offsetLeft={-15}
-                offsetTop={-15}
-                >
-                <div> <img src={cafeImage} alt={`${cafe.properties.name}`} />
-                  {cafe.properties.name}
-                </div>
 
-              </Marker>)
-          })}
+          {cafeData.features.map(cafe => (
+
+            <Marker key={cafe.properties.ID}
+              latitude={cafe.geometry.coordinates[0]}
+              longitude={cafe.geometry.coordinates[1]}
+              offsetLeft={-15}
+              offsetTop={-37}
+            >
+              <button
+                className="marker-btn"
+                onClick={event => {
+                  event.preventDefault();
+                  this.setState({ selectedCafe: cafe })
+                }}>
+                <img src={cafeImage} alt={`${cafe.properties.name}`} />
+              </button>
+
+            </Marker>
+          ))}
+
+          {this.state.selectedCafe && (
+            <Popup
+              latitude={this.state.selectedCafe.geometry.coordinates[0]}
+              longitude={this.state.selectedCafe.geometry.coordinates[1]}
+              offsetLeft={-15}
+              offsetTop={-37}
+              onClose={() => {
+                this.setState({ selectedCafe: null })
+              }}
+            >
+              <div key={this.state.selectedCafe.properties.ID}>
+                <div>{this.state.selectedCafe.properties.name}</div>
+                <div>{this.state.selectedCafe.properties.address}</div>
+              </div>
+            </Popup>
+          )}
+
         </ReactMapGL>
       </div>
     );

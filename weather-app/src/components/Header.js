@@ -9,7 +9,7 @@ class Header extends Component {
     render() {
         return <AppBar color='primary' position='static'>
             <Toolbar>
-                <TypoGraphy variant='title'
+                <TypoGraphy variant='h6'
                     color='inherit'>
                     <div>
                         <h1>Sää Tampereella on: {this.props.weather} astetta</h1>

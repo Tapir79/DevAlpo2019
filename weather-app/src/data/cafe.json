@@ -1,24 +1,87 @@
 {"type": "FeatureCollection", 
-    "features":[ {
-       "type": "Feature",
-       "properties": {
-           "ID": 1,
-           "name": "Bistro Venla"
-       },
-       "geometry": {
-           "type": "Point",
-           "coordinates": [61.4982904, 23.7577389]
-       } 
-    },
+    "features":[ 
     {
         "type": "Feature",
         "properties": {
-            "ID": 2,
-            "name": "Taverna Lautapelikahvila"
+            "ID": 1,
+            "name": "Taverna Lautapelikahvila",
+            "address": ""
         },
         "geometry": {
             "type": "Point",
             "coordinates": [61.4990956, 23.7571622]
+        } 
+     },
+     {
+        "type": "Feature",
+        "properties": {
+            "ID": 2,
+            "name": "Fazer Café Tampere",
+            "address": "Hämeenkatu 15"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4977112, 23.7628292]
+        } 
+     },
+     {
+        "type": "Feature",
+        "properties": {
+            "ID": 3,
+            "name": "Pyynikin munkkikahvila",
+            "address": "Keskustori 1"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4973813, 23.7619783]
+        } 
+     },
+     {
+        "type": "Feature",
+        "properties": {
+            "ID": 4,
+            "name": "Coffee House",
+            "address": "Keskustori 5"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4972315, 23.7616779]
+        } 
+     },
+     {
+        "type": "Feature",
+        "properties": {
+            "ID": 5,
+            "name": "Kaffila",
+            "address": "Aleksis Kiven katu"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4967055, 23.7603616]
+        } 
+     },
+     {
+        "type": "Feature",
+        "properties": {
+            "ID": 6,
+            "name": "Panttitalon vohvelikahvila",
+            "address": "Puutarhakatu 11"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4991834, 23.7578835]
+        } 
+     },
+     {
+        "type": "Feature",
+        "properties": {
+            "ID": 7,
+            "name": "MimiBo cafe",
+            "address": "Puutarhakatu 11"
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [61.4991966, 23.7581426]
         } 
      }
     ]
