@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ReactMapGL, { Marker } from "react-map-gl";
 import { accessToken } from "../mapbox.config.js";
-//import * as cafeData from '../data/cafe.json';
-import * as cafeImage from '../images/cafe.png';
+import * as cafeData from "../data/cafe.json";
+import * as cafeImage from "../images/cafe.png";
 import { ApiController } from "../controllers/ApiController";
 
 /* Component wrapping the mapbox map */
@@ -50,16 +50,26 @@ class Map extends Component {
           onViewportChange={viewport => this.setState({ viewport })}
           mapboxApiAccessToken={accessToken}
         >
-          <Marker
-            key={0}
-            latitude={61.4990956}
-            longitude={23.7571622}
-            offsetLeft={-15}
-            offsetTop={-15}
-          >
-            <div>Hello Marker World</div>
-            <img src={cafeImage} alt='Hello image' />
-          </Marker>
+          {/* looping the cafeData */}
+          {cafeData.features.map(cafe => (
+            /* Marker Pin wrapper */
+            <Marker
+              key={cafe.properties.ID}
+              latitude={cafe.geometry.coordinates[0]}
+              longitude={cafe.geometry.coordinates[1]}
+              offsetLeft={-15}
+              offsetTop={-37}
+            >
+              <button
+                onClick={event => {
+                  event.preventDefault();
+                  this.setState({ selectedCafe: cafe });
+                }}
+              >
+                <img src={cafeImage} alt={`${cafe.properties.name}`} />
+              </button>
+            </Marker>
+          ))}
         </ReactMapGL>
       </div>
     );
